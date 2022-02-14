@@ -1,0 +1,28 @@
+{
+  "name": "@withdouble/fullstack-challenge",
+  "version": "1.0.0",
+  "description": "Double fullstack engineering challenge",
+  "author": "engineering@withdouble.com",
+  "license": "ISC",
+  "scripts": {
+    "once": "npm run git-init && npm i && npm run db-migrate && npm run db-seed",
+    "git-init": "git init && git add . && git commit -m '🎉 Challenge accepted!'",
+    "db-migrate": "knex migrate:latest --knexfile ./src/db/config.ts",
+    "db-seed": "knex seed:run --knexfile ./src/db/config.ts",
+    "lint": "prettier --write src",
+    "start": "ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "dependencies": {
+    "apollo-server": "^3.6.2",
+    "axios": "^0.25.0",
+    "graphql": "^16.3.0",
+    "knex": "^1.0.1",
+    "vscode-sqlite3": "^4.0.11"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  },
+  "main": "index.ts"
+}
