@@ -7,5 +7,6 @@ export type Author = {
 	displayName: string;
 	givenName: string;
 	familyName: string;
+	pronoun: string;
 	countryCode: string | null; // https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 };
