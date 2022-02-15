@@ -8,6 +8,7 @@ import Db from '../db';
 export const typeDefs = gql`
 	type Author {
 		id: ID!
+		displayName: String!
 		givenName: String!
 		familyName: String!
 	}
@@ -19,6 +20,14 @@ export const typeDefs = gql`
 
 export const resolvers = {
 	Query: {
-		authors: () => Db.listAuthors(),
+		authors: async () => {
+			const authors = await Db.listAuthors.call(Db);
+			return authors.map((author) => ({
+				id: author.id,
+				displayName: `${author.givenName} ${author.familyName}`,
+				givenName: author.givenName,
+				familyName: author.familyName,
+			}));
+		},
 	},
 };
