@@ -10,8 +10,8 @@ export const typeDefs = gql`
 	type Author {
 		id: ID!
 		displayName: String!
-		givenName: String!
 		familyName: String!
+		givenName: String!
 		countryCode: String!
 	}
 
@@ -27,7 +27,7 @@ export const resolvers = {
 			const countryCode = await new Countries().getCountryName('US');
 			return authors.map((author) => ({
 				...author,
-				displayName: `${author.givenName} ${author.familyName}`,
+				displayName: `${author.familyName} ${author.givenName}`,
 				countryCode,
 			}));
 		},
