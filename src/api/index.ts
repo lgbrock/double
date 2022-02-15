@@ -5,6 +5,7 @@
 import { gql } from 'apollo-server';
 import Db from '../db';
 import Countries from '../lib/Countries';
+import getCountryName from '../lib/Countries';
 
 export const typeDefs = gql`
 	type Author {
@@ -23,7 +24,7 @@ export const typeDefs = gql`
 export const resolvers = {
 	Query: {
 		authors: async () => {
-			const authors = await Db.listAuthors();
+			const authors = await Db.listAuthors.call(Db);
 			return authors.map((author) => ({
 				id: author.id,
 				displayName: `${author.givenName} ${author.familyName}`,
@@ -31,6 +32,7 @@ export const resolvers = {
 				familyName: author.familyName,
 				countryCode: author.countryCode,
 			}));
+			// show names of countries
 		},
 	},
 };
