@@ -21,6 +21,10 @@ export class Db {
 		return this.knex.table<Author>('authors').select('*').limit(10);
 	}
 
+	public async getAuthor(id: number) {
+		return this.knex.table<Author>('authors').where({ id }).first();
+	}
+
 	// public listAuthorsByCountry(countryCode: string) {
 	// 	return this.knex
 	// 		.table<Author>('authors')

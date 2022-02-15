@@ -12,6 +12,7 @@ export const typeDefs = gql`
 		displayName: String!
 		familyName: String!
 		givenName: String!
+		pronouns: String!
 		countryCode: String!
 	}
 
@@ -28,13 +29,18 @@ export const resolvers = {
 			const countryCode = await new Countries().getCountryName('US');
 			return authors.map((author) => ({
 				...author,
-				displayName: `${author.familyName} ${author.givenName}`,
 				countryCode,
+				displayName: `${author.givenName} ${author.familyName}`,
 			}));
 		},
 		author: async (root, { id }) => {
-			const author = await Db.listAuthors();
-			return author.find((author) => author.id === id);
+			const author = await Db.getAuthor(id);
+			const countryCode = await new Countries().getCountryName('US');
+			return {
+				...author,
+				countryCode,
+				displayName: `${author.givenName} ${author.familyName}`,
+			};
 		},
 	},
 };
