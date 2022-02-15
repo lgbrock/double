@@ -21,7 +21,13 @@ export class Db {
 		return this.knex.table<Author>('authors').select('*').limit(10);
 	}
 
-  
+	// public listAuthorsByCountry(countryCode: string) {
+	// 	return this.knex
+	// 		.table<Author>('authors')
+	// 		.where({ countryCode })
+	// 		.select('*')
+	// 		.limit(10);
+	// }
 }
 
 export default new Db();

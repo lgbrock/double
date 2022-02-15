@@ -40,6 +40,8 @@ export default class Countries {
 
 	// 🗺 Add your method(s) here
 	// display full country name with countryCode
+	// GET country by name with countryCode
+
 	public async getCountryName(countryCode: string) {
 		const { data } = await this.restApi.get<Country[]>(
 			`/alpha/${encodeURIComponent(countryCode)}`
