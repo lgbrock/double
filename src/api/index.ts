@@ -3,6 +3,7 @@
  */
 
 import { gql } from 'apollo-server';
+import Db from '../db';
 
 export const typeDefs = gql`
 	type Author {
@@ -18,10 +19,6 @@ export const typeDefs = gql`
 
 export const resolvers = {
 	Query: {
-		authors: () => {
-			// 🐞 Bug fix needed!
-			// We're not returning what's in DB 😱
-			return [];
-		},
+		authors: () => Db.listAuthors(),
 	},
 };
