@@ -23,7 +23,6 @@ export const typeDefs = gql`
 
 	type Mutation {
 		createAuthor(
-			displayName: String!
 			familyName: String!
 			givenName: String!
 			pronouns: String!
