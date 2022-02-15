@@ -17,6 +17,7 @@ export const typeDefs = gql`
 
 	type Query {
 		authors: [Author!]!
+		author(id: ID!): Author
 	}
 `;
 
@@ -30,6 +31,10 @@ export const resolvers = {
 				displayName: `${author.familyName} ${author.givenName}`,
 				countryCode,
 			}));
+		},
+		author: async (root, { id }) => {
+			const author = await Db.listAuthors();
+			return author.find((author) => author.id === id);
 		},
 	},
 };
