@@ -10,8 +10,6 @@ export function up(knex: Knex) {
 
 		table.string('givenName').notNullable();
 		table.string('familyName').notNullable();
-		table.string('displayName').notNullable();
-		table.string('pronouns').notNullable();
 		table.string('countryCode').notNullable();
 	});
 }

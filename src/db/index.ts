@@ -25,13 +25,23 @@ export class Db {
 		return this.knex.table<Author>('authors').where({ id }).first();
 	}
 
-	// public listAuthorsByCountry(countryCode: string) {
-	// 	return this.knex
-	// 		.table<Author>('authors')
-	// 		.where({ countryCode })
-	// 		.select('*')
-	// 		.limit(10);
-	// }
+	public async createAuthor(author: Author) {
+		return this.knex.table<Author>('authors').insert(author).returning('*');
+	}
+
+	public async updateAuthor(author: Author) {
+		return this.knex.table<Author>('authors').update(author).where({
+			id: author.id,
+		});
+	}
+
+	public listAuthorsByCountry(countryCode: string) {
+		return this.knex
+			.table<Author>('authors')
+			.where({ countryCode })
+			.select('*')
+			.limit(10);
+	}
 }
 
 export default new Db();

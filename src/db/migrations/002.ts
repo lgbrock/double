@@ -9,6 +9,7 @@ export function up(knex: Knex) {
     // Country code is a 2-letter code
     // https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
     table.string("countryCode", 2).nullable();
+    
   });
 }
 

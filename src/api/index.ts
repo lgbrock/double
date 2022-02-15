@@ -20,6 +20,16 @@ export const typeDefs = gql`
 		authors: [Author!]!
 		author(id: ID!): Author
 	}
+
+	type Mutation {
+		createAuthor(
+			displayName: String!
+			familyName: String!
+			givenName: String!
+			pronouns: String!
+			countryCode: String!
+		): Author
+	}
 `;
 
 export const resolvers = {
@@ -40,6 +50,26 @@ export const resolvers = {
 				...author,
 				countryCode,
 				displayName: `${author.givenName} ${author.familyName}`,
+			};
+		},
+	},
+	Mutation: {
+		// Create and edit author information
+		createAuthor: async (
+			root,
+			{ displayName, familyName, givenName, pronouns, countryCode }
+		) => {
+			const author = await Db.createAuthor({
+				displayName,
+				familyName,
+				givenName,
+				pronouns,
+				countryCode,
+				id: 0,
+			});
+			return {
+				...author,
+				countryCode,
 			};
 		},
 	},
